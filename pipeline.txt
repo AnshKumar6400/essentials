@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN_HOME' // Ensure 'MAVEN_HOME' is correctly configured in Jenkins
+    }
+    stages {
+        stage('Git Repo & Clean') {
+            steps {
+                // Check if the directory exists and delete it if it does
+                bat """
+                if exist JavaMavenprac (
+                    rmdir /s /q JavaMavenprac
+                )
+                """
+                // Clone your GitHub repository
+                bat "git clone https://github.com/AnshKumar6400/JavaMavenprac.git"
+                // Clean the Maven project
+                bat "mvn clean -f JavaMavenprac"
+            }
+        }
+        stage('Install') {
+            steps {
+                // Install dependencies
+                bat "mvn install -f JavaMavenprac"
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run tests
+                bat "mvn test -f JavaMavenprac"
+            }
+        }
+        stage('Package') {
+            steps {
+                // Package the application
+                bat "mvn package -f JavaMavenprac"
+            }
+        }
+    }
+}
