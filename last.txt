@@ -1,0 +1,26 @@
+minikube start
+kubectl create deployment mynginx --image=nginx 
+kubectl get deployments 
+kubectl expose deployment mynginx --type=NodePort --port=80 --target-port=80 
+kubectl scale deployment mynginx --replicas=4
+kubectl port-forward svc/mynginx 8081:80 
+
+df
+docker pull jasonrivers/nagios:latest
+docker run -d --name nagiosdemo -p 8888:80jasonrivers/nagios:latest
+Username: nagiosadmin
+ Password: nagios
+To stop: docker stop nagiosdemo
+o To remove: docker rm nagiosdemo
+
+awsb
+FROM nginx:alpine
+COPY . /usr/share/nginx/html 
+sudo docker build -t my-web-app .
+sudo docker run -d -p 80:80 my-web-app
+
+awsc
+FROM tomcat:9-jdk11
+COPY target/*.war /usr/local/tomcat/webapps/ 
+sudo docker build -t maven-web-project .
+sudo docker run -d -p 80:80 maven-web-project 
