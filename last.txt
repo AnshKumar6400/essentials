@@ -43,3 +43,22 @@ CMD ["redis-server"]
 4)docker stop id
 5)docker commit id hemanth150804/redisnewimage //localrepo
 6)docker push hemanth150804/redisnewimage
+
+
+EXPERIMENT 7b
+1)docker pull ubuntu
+2)docker run -it --name newubuntu -d ubuntu
+3)docker exec -it newubuntu bash
+4)check git will be not there, so install it and save it by apt update,apt install git -y
+
+5)now exit and stop the container
+6)docker commit newubuntu hemanth150804/newubuntu2024
+7)docker login
+8)docker push hemanth150804/newubuntu2024
+
+delete container and image
+7)docker pull hemanth150804/newubuntu2024
+8)docker run -it --name newubuntu2024 -d ubuntu
+9)docker exec -it newubuntu2024 bash
+
+check for version it will be there,
